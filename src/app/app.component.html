@@ -1,0 +1,63 @@
+<div class="common-page-filter">
+  <div class="form-group">
+    <form [formGroup]="filterForm">
+      <div class="data-field">
+        <div formArrayName="filterField">
+          <ng-container *ngFor="let X of textFilter; let ix = index">
+            <div class="form-array-field" formGroupName="{{ ix }}">
+              <div class="form-input-field parent-field">
+                <div class="child-field">
+                  <div class="filter-field child-fieldCol1">
+                    <label class="label" for="selectColumn">
+                      Select Column<span class="requiredStar">*</span>
+                    </label>
+                    <div class="filter-text">
+                      <select (change)="getColumnFilter(ix)" class="form-control" formControlName="filterColumn">
+                        <option value="null" hidden>-- Select Ingredient --</option>
+                        <option *ngFor="let ingredient of filterKey"  [value]="ingredient.filterDataSet">
+                          {{ingredient.value}}
+                        </option>
+                      </select>
+                      <!-- <p-dropdown [options]="filterKey" formControlName="filterColumn" placeholder="Filter By"
+                        (onChange)="getColumnFilter(ix)" optionDisabled="inactive" id="selectColumn"
+                        scrollHeight="100px" optionLabel="value" optionValue="filterDataSet">
+                      </p-dropdown> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <div class="add-column">
+            <div class="add-column-container">
+              <div class="filter-field">
+                <div id="filterAdd" (click)="addX()"></div>
+                <button type="button" class="btn btn-reset" (click)="addX()" id="cancelBtn">
+                  Add Column
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="form-button">
+        <div>
+          <button type="button" class="btn btn-reset" (click)="closeDialog()" id="cancelBtn">
+            Cancel
+          </button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-submit" [disabled]="filterForm.pristine" (click)="onSubmit(filterForm)"
+            id="applyBtn">
+            Apply
+          </button>
+        </div>
+      </div> -->
+      <button type="button" class="btn btn-submit" (click)="onSubmit(filterForm)"
+      id="applyBtn">
+      submit
+    </button>
+    </form>
+  </div>
+</div>
